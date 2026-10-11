@@ -1,1 +1,59 @@
-// app global css in SCSS form
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-width: 320px;
+  background: #f6f8f6;
+  color: #27332d;
+  font-family: Inter, "Segoe UI", Roboto, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(166, 201, 106, 0.3);
+}
+
+.q-card {
+  border-color: #e8ede9;
+  border-radius: 14px;
+}
+
+.q-field--outlined .q-field__control {
+  border-radius: 10px;
+}
+
+.q-field--outlined .q-field__control:before {
+  border-color: #e1e8e2;
+}
+
+.q-field--outlined .q-field__control:hover:before {
+  border-color: #9daf9f;
+}
+
+.q-field--focused .q-field__control:after {
+  border-color: #a6c96a;
+}
+
+.q-menu {
+  border: 1px solid #e7ece7;
+  border-radius: 12px;
+  box-shadow: 0 16px 38px rgba(34, 48, 39, 0.14);
+}
+
+.q-dialog__inner > .q-card {
+  border-radius: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

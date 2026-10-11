@@ -7,24 +7,24 @@ export const useExpensesStore = defineStore('expenses', () => {
 
   // Load expenses for a specific user
   async function loadExpensesForUser(userId) {
-    try {
-      const res = await fetch(`http://localhost:3000/api/Troskovi?userId=${userId}`)
-      const data = await res.json()
-      return Array.isArray(data) ? data : []
-    } catch (err) {
-      console.error(err)
-      return []
-    }
+    const res = await fetch(`http://localhost:3000/api/Troskovi?userId=${userId}`)
+    if (!res.ok) throw new Error(`Dohvat troškova nije uspio (${res.status}).`)
+
+    const data = await res.json()
+    if (!Array.isArray(data)) throw new Error('API je vratio neočekivan popis troškova.')
+    return data
   }
 
   // Add expense
   async function addExpense({ amount, category, date, userId }) {
-    if (!userId) return
-    await fetch('http://localhost:3000/api/UnosTroskova', {
+    if (!userId) throw new Error('Za unos troška potrebno je odabrati korisnika.')
+
+    const res = await fetch('http://localhost:3000/api/UnosTroskova', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId, amount, category, date }),
     })
+    if (!res.ok) throw new Error(`Spremanje troška nije uspjelo (${res.status}).`)
   }
 
   return { expenses, loading, loadExpensesForUser, addExpense }
